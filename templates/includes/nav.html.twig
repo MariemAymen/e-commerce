@@ -1,0 +1,41 @@
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">E-commerce</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{{path('home')}}">Acceuil</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{path('about')}}">A propos de moi</a></li>
+
+            {# <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">connexion</a></li> #}
+            <li class="nav-item"><a class="nav-link" href="{{ path('app_inscription') }}">Inscription</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('products') }}">Produit</a></li>
+        </ul>
+    <ul  class="navbar-nav">
+            {% if is_granted("ROLE_USER") and not is_granted("ROLE_ADMIN") %}
+            <li class="btn btn-primary"><i class="fas fa-user">{{ app.user.nom }}</li> |
+            <li class="nav-item"><a href="{{ path('app_espace') }}">  Mon compte</a></li>
+            <li class="nav-item"><a href="{{ path('app_logout') }}">Déconnecxion</a></li>
+     
+             {% endif %}
+
+             {% if is_granted("ROLE_ADMIN") %}
+             <li class="nav-item"></i>{{ app.user.nom}} </li>
+            <li class="nav-item"><a href="{{ path('app_espace') }}">Mon compte</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('admin') }}">Admin</a></li>
+             <li class="nav-item"><a class="nav-link" href="{{ path ('app_logout') }}">Deconnexion</a></li>
+           {% endif %}
+
+           {% if not is_granted("ROLE_USER") and not is_granted("ROLE_ADMIN") %}
+          
+           <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
+
+
+        {% endif %}
+        </ul>
+        </div>
+    </div>
+    </nav>

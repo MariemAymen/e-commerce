@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+
+ <div class="member-area">
+        <h2>Mes Commandes</h2>
+        {% if commandes %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Numéro de Commande</th>
+                        <th>Images</th>
+                        <th>Adresses</th>
+                        <th>Date</th>
+                        <th>Statut</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for commande in commandes %}
+                        <tr>
+                            <td>{{ commande.numeroSuivi }}</td>
+                            <td>
+                                {% for detail in commande.orderDetails %}
+                                    <img src="{{ asset('upload/' ~ detail.product.image) }}" alt="Image du produit" style="height: 50px;">
+                                {% endfor %}
+                            </td>
+                            <td>{{ commande.adresseLivraison }}</td>
+                            <td>{{ commande.orderedAt|date('d/m/Y') }}</td>
+                            <td>{{ commande.status }}</td>
+                            <td>{{ commande.total }} €</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>Vous n'avez pas encore passé de commandes.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

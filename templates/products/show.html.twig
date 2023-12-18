@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block title %} Hello ProductsController {% endblock %}
+{% block body %}
+<h1>Détails du produits</h1>
+<p><img src="{{ asset('upload/' ~ product.image) }}" alt="{{ product.nom}}" class="img-fluid"></p>
+<p> Id : {{ product.id }}</p>
+<p>Nom : {{ product.nom }}</p>
+<p>Prix : {{ (product.prix /100)| number_format(2,',',',') }}€</p>
+<P>Description : {{ product.description| raw }}</P>
+{% endblock %}
